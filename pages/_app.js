@@ -18,7 +18,7 @@ body{
   font-family:Verdana;
 }
 `;
- 
+
 const theme = {
   colors: {
     primary: "#fafafa",
@@ -26,13 +26,13 @@ const theme = {
 };
 
 function MyApp({ Component, pageProps }) {
-  return(
+  return (
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
+        <Component {...pageProps} />
       </ThemeProvider>
-    </> )
+    </>)
 }
 
 export default MyApp

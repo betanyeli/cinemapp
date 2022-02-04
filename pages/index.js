@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import {Navbar, Button, Modal} from '../components'
+import { Navbar, Button, Modal } from '../components'
 
 
 export default function Home() {
@@ -11,9 +11,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-  <Navbar /> 
-  <Button />
-  <Modal />     
+      <Navbar />
+      <Button />
+      <Modal />
     </div>
   )
 }

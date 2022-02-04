@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 export default function Navbar() {
     const routes = [{
@@ -10,11 +11,11 @@ export default function Navbar() {
         path: '/about-us'
     }]
     return (
-      <nav>
-          <ul>
-              {routes.map((route, index) => <li key={route.title}><a href={route.path}>{route.title}</a></li>)}
-          </ul>
+        <nav>
+            <ul>
+                {routes.map((route, index) => <li key={route.title}><Link href={route.path}>{route.title}</Link></li>)}
+            </ul>
 
-      </nav>
+        </nav>
     )
-  }
+}
