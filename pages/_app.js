@@ -1,4 +1,8 @@
 import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { Provider } from 'react-redux'
+import { createWrapper } from "next-redux-wrapper";
+import store from "../redux/store";
+
 const GlobalStyle = createGlobalStyle`
 html{
   box-sizing: border-box;
@@ -29,10 +33,13 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </Provider>
     </>)
 }
-
-export default MyApp
+const makeStore = () => store
+const wrapper = createWrapper(makeStore)
+export default wrapper.withRedux(MyApp)

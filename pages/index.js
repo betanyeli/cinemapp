@@ -1,8 +1,17 @@
 import Head from 'next/head'
+import React, { useEffect } from 'react'
 import { Navbar, Button, Modal } from '../components'
+import { useDispatch } from 'react-redux'
+import { fetchMovies } from '../redux/actions/moviesAction'
 
 
 export default function Home() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchMovies())
+  }, [])
+
   return (
     <div>
       <Head>
