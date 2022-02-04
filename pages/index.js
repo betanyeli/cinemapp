@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import {Navbar, Button, Modal} from './components'
+import {Navbar, Button, Modal} from '../components'
 
 
 export default function Home() {
