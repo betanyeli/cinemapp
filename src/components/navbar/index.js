@@ -1,15 +1,9 @@
-import Reac, { useState } from 'react';
-import {
-    Nav,
-    NavLink,
-    NavMenu,
-    NavLinkContainer
-} from './navElements';
-import Button from '../button';
-import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
-
-
-
+import React, { useState } from "react";
+import CustomLink from "../customLink";
+import { Box, Toolbar, IconButton, Menu, MenuItem, Link } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import useMediaQuery from "@/hooks/useMediaQuery";
+import { CustomAppBar } from "./navComponents";
 
 const routes = [
     {
@@ -28,23 +22,55 @@ const routes = [
 ]
 
 const Navbar = () => {
-    const [open, setOpen] = useState(false)
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    const isMobile = useMediaQuery('(max-width: 648px)')
+
+    const renderMenuItem = () => {
+        return routes.map(({ href, title }) => <MenuItem key={title}><CustomLink href={href}><Link style={{ textDecoration: 'none' }}>{title}</Link></CustomLink></MenuItem>)
+    }
     return (
-        <>
-            <Nav>
-                <NavMenu>
-                    {routes.map(({ title, href, index }) => {
-                        return < NavLinkContainer key={title} >
-                            <NavLink href={href} activeStyle>
-                                <a>{title}</a>
-                            </NavLink>
-                        </NavLinkContainer>
-                    })}
-                </NavMenu>
-                <Button title={null} onClick={() => setOpen(open ? false : true)} icon={open ? <FaAngleDoubleUp style={{ color: '#fff' }} /> : <FaAngleDoubleDown style={{ color: '#fff' }} />} />
-                {open && <p>mostrar una cosa</p>}
-            </Nav>
-        </>
+        <Box sx={{ flexGrow: 1 }}>
+            <CustomAppBar position="fixed">
+                <Toolbar>
+
+                    {isMobile ? <><IconButton
+                        size="large"
+                        edge="end"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }}
+                        id="basic-button"
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
+                    >
+                        <MenuIcon />
+                    </IconButton><Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        MenuListProps={{
+                            'aria-labelledby': 'basic-button',
+                        }}
+                    >
+                            {renderMenuItem()}
+                        </Menu></> : renderMenuItem()}
+                    {/* <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        News
+                    </Typography> */}
+
+                </Toolbar>
+            </CustomAppBar>
+        </Box>
     );
 };
 
