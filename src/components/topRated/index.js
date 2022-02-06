@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Button, Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import { Div } from './styles'
 import { useSelector } from 'react-redux'
 import AliceCarousel from 'react-alice-carousel'
@@ -18,7 +18,7 @@ const TopRated = ({ className, ...rest }) => {
 
 
     const Card = filteredData().map(card => {
-        return <MultiActionAreaCard title={card.title} rating={card.rating} />
+        return <MultiActionAreaCard key={card} title={card.title} rating={card.rating} />
     })
 
     const responsive = {
