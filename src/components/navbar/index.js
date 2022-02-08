@@ -3,7 +3,8 @@ import CustomLink from "../customLink";
 import { Box, Toolbar, IconButton, Menu, MenuItem, Link } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from "@/hooks/useMediaQuery";
-import { CustomAppBar } from "./navComponents";
+import { CustomAppBar } from "./styles";
+
 
 const routes = [
     {
@@ -33,13 +34,19 @@ const Navbar = () => {
     const isMobile = useMediaQuery('(max-width: 648px)')
 
     const renderMenuItem = () => {
-        return routes.map(({ href, title }) => <MenuItem key={title}><CustomLink href={href}><Link style={{ textDecoration: 'none' }}>{title}</Link></CustomLink></MenuItem>)
+        return routes.map(({ href, title }) => <MenuItem key={title}>
+            <CustomLink href={href}>
+                <Link
+                    style={{ textDecoration: 'none', color: isMobile ? '#000' : '#fff', fontSize: 14 }}>
+                    {title}
+                </Link>
+            </CustomLink>
+        </MenuItem>)
     }
     return (
         <Box sx={{ flexGrow: 1 }}>
             <CustomAppBar position="fixed">
                 <Toolbar>
-
                     {isMobile ? <><IconButton
                         size="large"
                         edge="end"
@@ -64,10 +71,6 @@ const Navbar = () => {
                     >
                             {renderMenuItem()}
                         </Menu></> : renderMenuItem()}
-                    {/* <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        News
-                    </Typography> */}
-
                 </Toolbar>
             </CustomAppBar>
         </Box>

@@ -1,16 +1,19 @@
 import * as React from 'react';
-import { Button, CardActionArea, CardActions, Typography, CardMedia, CardContent, Card } from '@mui/material';
-import useMediaQuery from 'src/hooks/useMediaQuery';
+import { CardActionArea, CardActions, Typography, CardMedia, CardContent, Card } from '@mui/material';
+import useMediaQuery from '@/hooks/useMediaQuery';
+import Link from 'next/link';
+
+
 export default function MultiActionAreaCard({ title, year, rating }) {
     const isMobile = useMediaQuery('(max-width: 768px)')
-    const width = isMobile ? '250' : '300'
+    const width = isMobile ? '200' : '300'
     const height = isMobile ? '300' : '300'
     const getRandomInt = (min, max) => {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
     return (
-        <Card style={{ textAlign: 'center', margin: '10px' }} >
+        <Card style={{ textAlign: 'center', margin: '10px', padding: 10 }} >
             <CardActionArea>
                 <CardMedia
                     component='img'
@@ -29,9 +32,9 @@ export default function MultiActionAreaCard({ title, year, rating }) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size='small' color='primary'>
-                    Share
-                </Button>
+
+                <Link href={`/movies/${title}&${year || 'not-found'}`} > Share </Link>
+
             </CardActions>
         </Card>
     );

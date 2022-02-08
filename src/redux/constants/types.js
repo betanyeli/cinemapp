@@ -1,2 +1,3 @@
-export const GET_MOVIES = 'GET MOVIES O.O '
+export const SET_MOVIES = 'SET MOVIES'
+export const GET_MOVIES = 'GET MOVIES'
 export const GET_MOVIES_FAILED = 'GET MOVIES FAILED '

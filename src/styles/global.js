@@ -12,15 +12,15 @@ export const Global = createGlobalStyle`
   }
   :root {
       font-size: ${px2vw(24)};
-      background: #464541;
+      background: #e5e5e5;
       @media (min-width: 768px) {
         font-size: ${px2vw(18)};
-        background: #464541;
+        background: #e5e5e5;
       }
 
       @media (min-width: 1024px) {
         font-size: ${px2vw(16)};
-        background: #464541;
+        background: #e5e5e5;
       }
     }
 `;

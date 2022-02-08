@@ -1,18 +1,31 @@
 import React from 'react'
 import Navbar from '@/components/navbar'
-import BannerHero from '@/components/bannerHero'
 import dynamic from 'next/dynamic'
+import { connect } from 'react-redux'
+import BannerHero from '@/components/bannerHero'
+import Filters from '@/components/filters'
+import Footer from '@/components/footer'
 
 const ComponentWithNoSSR = dynamic(() => import('@/components/topRated'), {
     ssr: false
 })
 
-export default function HomeScreen() {
+const HomeScreen = ({ movies }) => {
     return (
         <div>
             <Navbar />
-            <BannerHero title={'CinemApp'} source={'https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1159&q=80'} />
-            <ComponentWithNoSSR />
+            <BannerHero source={'https://i.ibb.co/Yd1nGhL/Naranja-Amarillo-Profesional-Gradiente-Aplicacio-n-Fitness-Mascotas-Banner-Horizontal.png'} />
+            <Filters movies={movies} />
+            <ComponentWithNoSSR movies={movies} />
+            <Footer />
         </div>
     )
 }
+
+const mapStateToProps = (state) => {
+    const { movies } = state
+    return {
+        movies: movies,
+    }
+}
+export default connect(mapStateToProps)(HomeScreen);

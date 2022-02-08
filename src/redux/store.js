@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import thunkMiddleware from 'redux-thunk'
-import reducers from './reducers/reducers'
+import reducers from './reducers'
+import { data } from '@/services/data';
 
 const bindMiddlware = (middlware) => {
     if (process.env.NODE_ENV !== 'production') {
@@ -24,7 +25,10 @@ const reducer = (state, action) => {
     }
 }
 
-const initStore = (initialState = {}) => {
+const initialState = {
+    movies: data
+}
+export const initStore = () => {
     return createStore(reducer, initialState, bindMiddlware([thunkMiddleware]))
 }
 
