@@ -1,11 +1,9 @@
 import React from 'react'
-import { useRouter } from 'next/router'
-import { replaceUrlInArray } from 'src/utils'
-import { data } from '@/services/data'
-import { moviesUrls } from '@/services/moviesUrl'
+import { useRouter as NextUseRouter } from 'next/router'
+
 
 export default function movies() {
-    const router = useRouter()
+    const router = NextUseRouter()
     return (
         <div>
             <h2>MOVIE {router.query.id}</h2>
