@@ -4,6 +4,8 @@ import { Div } from './styles'
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
 import MultiActionAreaCard from './card'
+import { useRouter as NextUseRouter } from 'next/router'
+import absoluteUrl from 'next-absolute-url'
 
 
 const TopRated = ({ movies }) => {
@@ -16,7 +18,7 @@ const TopRated = ({ movies }) => {
     }
 
     const Card = filteredData()?.map(card => {
-        return <MultiActionAreaCard key={card} title={card.title} rating={card.rating} />
+        return <MultiActionAreaCard key={card} title={card.title} rating={card.rating} year={card.year} url={`${origin}/movies/${card.title}&${card.year || 'not-found'}`} />
     })
 
     const responsive = {
@@ -42,7 +44,7 @@ const TopRated = ({ movies }) => {
                 <Typography m={4} variant={'h2'}>Top 8</Typography>
             </Grid>
             <Grid container justifyContent='center'>
-                <Typography mb={6} variant={'body1'}>Top rates movies
+                <Typography mb={6} variant={'body1'}>Top Rates movies
                 </Typography>
             </Grid>
             <Grid container spacing={4}>
@@ -54,5 +56,12 @@ const TopRated = ({ movies }) => {
 }
 
 
+export async function getServerSideProps(context) {
+    const { protocol, host } = absoluteUrl(req, 'localhost:10040')
+    const origin = protocol + '//' + host
+    return {
+        props: { origin }, // will be passed to the page component as props
+    }
+}
 
 export default TopRated

@@ -1,5 +1,4 @@
 const reducers = (state, action) => {
-    console.log('reducers', { state: state, action: action })
     switch (action.type) {
         case 'SET_MOVIES':
             return {
